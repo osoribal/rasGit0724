@@ -23,11 +23,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', function(req, res, next) {
-	res.render('index', { title: 'Express' });
+	res.send('/ sending complete');
 });
 
 app.use('/users',  function(req, res, next) {
-	res.render('respond with a resource');
+	res.send('/users sending complete');
 });
 
 // catch 404 and forward to error handler
