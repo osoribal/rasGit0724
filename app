@@ -22,6 +22,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/', function(req, res, next) {
+	res.send('/ sending complete');
+});
+app.get('/user', function(req, res, next) {
+	res.send('/user sending complete');
+});
+
 app.post('/user/login', function(req, res, next) {
 	res.send('/user/login sending complete');
 });
@@ -55,7 +62,7 @@ app.post('/calendar/remove', function(req, res, next) {
 app.post('/calendar/list', function(req, res, next) {
 	res.send('/calendar/list sending complete');
 });
-app.post('/chatting', function(req, res, next) {
+app.get('/chatting', function(req, res, next) {
 	res.send('/chatting sending complete');
 });
 app.post('/user/profile', function(req, res, next) {
