@@ -22,12 +22,53 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', function(req, res, next) {
-	res.send('/ sending complete');
+app.post('/user/login', function(req, res, next) {
+	res.send('/user/login sending complete');
 });
-
-app.get('/users',  function(req, res, next) {
-	res.send('/users sending complete');
+app.post('/link/findpartner', function(req, res, next) {
+	res.send('/link/findpartner sending complete');
+});
+app.post('/link/request', function(req, res, next) {
+	res.send('/link/request sending complete');
+});
+app.post('/link/reply', function(req, res, next) {
+	res.send('/link/reply sending complete');
+});
+app.post('/letter/letterlist', function(req, res, next) {
+	res.send('/letter/letterlist sending complete');
+});
+app.post('/letter/readletter', function(req, res, next) {
+	res.send('/letter/readletter sending complete');
+});
+app.post('/letter/writeletter', function(req, res, next) {
+	res.send('/letter/writeletter sending complete');
+});
+app.post('/letter/deleteletter', function(req, res, next) {
+	res.send('/letter/deleteletter sending complete');
+});
+app.post('/calendar/add', function(req, res, next) {
+	res.send('/calendar/add sending complete');
+});
+app.post('/calendar/remove', function(req, res, next) {
+	res.send('/calendar/remove sending complete');
+});
+app.post('/calendar/list', function(req, res, next) {
+	res.send('/calendar/list sending complete');
+});
+app.post('/chatting', function(req, res, next) {
+	res.send('/chatting sending complete');
+});
+app.post('/user/profile', function(req, res, next) {
+	res.send('/user/profile sending complete');
+});
+app.post('/user/uploadprofile', function(req, res, next) {
+	res.send('/user/uploadprofile sending complete');
+});
+app.post('/notice', function(req, res, next) {
+	res.send('/notice sending complete');
+});
+app.post('/user/dropout', function(req, res, next) {
+	res.send('/user/dropout sending complete');
 });
 
 // catch 404 and forward to error handler
