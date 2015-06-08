@@ -27,7 +27,7 @@ app.use('/', function(req, res, next) {
 });
 
 app.use('/users',  function(req, res, next) {
-  res.send('respond with a resource');
+	res.render('respond with a resource');
 });
 
 // catch 404 and forward to error handler
