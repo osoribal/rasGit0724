@@ -22,11 +22,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', function(req, res, next) {
+app.get('/', function(req, res, next) {
 	res.send('/ sending complete');
 });
 
-app.use('/users',  function(req, res, next) {
+app.get('/users',  function(req, res, next) {
 	res.send('/users sending complete');
 });
 
