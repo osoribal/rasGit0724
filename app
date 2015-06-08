@@ -64,7 +64,7 @@ app.post('/user/profile', function(req, res, next) {
 app.post('/user/uploadprofile', function(req, res, next) {
 	res.send('/user/uploadprofile sending complete');
 });
-app.post('/notice', function(req, res, next) {
+app.get('/notice', function(req, res, next) {
 	res.send('/notice sending complete');
 });
 app.post('/user/dropout', function(req, res, next) {
