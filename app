@@ -129,8 +129,7 @@ app.post('/calendar/remove', function(req, res, next) {
 });
 app.post('/calendar/list', function(req, res, next) {
 	if (req.body.Date == -1) {
-		client.query('update calendar set calendar_name=?, place=?, date=?, hour=?, min=?, reply=?, prealarm=?, sound=? where calendar_id=?',
-			[req.body.Name, req.body.Place, req.body.date, req.body.Hour, req.body.Min, req.body.Reply, req.body.Prealarm, req.body.Sound, req.body.Id],
+		client.query('select * from calendar where DATE(date) between CURDATE() and ADDDATE(CURDATE(), INTERVAL 31 DAY)',
 			function(err, rows, fields) {
     			if(err) {
     				res.json(
@@ -152,8 +151,7 @@ app.post('/calendar/list', function(req, res, next) {
 			}
 		);
 	} else {
-		client.query('insert into calendar (link_id, calendar_name, place, date, hour, min, reply, prealarm, sound) values (1, ?, ?, ?, ?, ?, ?, ?, ?)', 
-			[req.body.Name, req.body.Place, req.body.date, req.body.Hour, req.body.Min, req.body.Reply, req.body.Prealarm, req.body.Sound], 
+		client.query('select * from calendar where DATE(date)=?', req.body.Date, 
 			function(err, rows, fields) {
     			if(err) {
     				res.json(
