@@ -115,18 +115,17 @@ app.post('/calendar/remove', function(req, res, next) {
 							result : null
 						}
 					);
-				} else {
-					res.json(
-						{
-							success : '1',
-							message : 'OK',
-							result : null
-						}
-					);
-				}
+			} else {
+				res.json(
+					{
+						success : '1',
+						message : 'OK',
+						result : null
+					}
+				);
 			}
-		);
-	}
+		}
+	);
 });
 app.post('/calendar/list', function(req, res, next) {
 	res.send('/calendar/list sending complete');
