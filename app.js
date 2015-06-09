@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 //aaaaaaaaaaa
 var routes = require('./routes/index');
-var cal = require('./routes/cal');
+var calendar = require('./routes/calendar');
 var chatting = require('./routes/chatting');
 
 //mysql
@@ -46,8 +46,100 @@ app.post('/link/request', function(req, res, next) {
 app.post('/link/reply', function(req, res, next) {
 	res.send('/link/reply sending complete');
 });
+<<<<<<< HEAD
 
 app.use('/calendar', cal);
+=======
+app.post('/letter/letterlist', function(req, res, next) {
+	var linkId = req.body.link_id;
+	client.query('select * from letter where link_id = ?',[linkId], function(err, result, fields){
+		if(err)
+		{ res.json(
+			{
+				success : '0',
+				message : 'fail',
+				result : null
+			});
+		}
+		else
+		{ res.json(
+			{
+				success : '1',
+				message : 'OK',
+				result : result
+			});
+		}
+	})
+});
+	
+app.post('/letter/readletter', function(req, res, next) {
+	var letterId = req.body.letter_id;
+	client.query('select * from letter where letter_id = ?',[letterId], function(err, result, fields){
+		if(err)
+		{ res.json(
+			{
+				success : '0',
+				message : 'fail',
+				result : null
+			});
+		}
+		else
+		{ res.json(
+			{
+				success : '1',
+				message : 'OK',
+				result : result
+			});
+		}
+	})
+});
+app.post('/letter/writeletter', function(req, res, next) {
+	var linkId = req.body.link_id;
+	var senderId = req.body.user_id;
+	var letterContent = req.body.letter_content;
+	var letterDate = req.body.date;
+	client.query('insert into letter (link_id, sender_id, content, date) value (?, ?, ?, ?)',[linkId, senderId, letterContent, letterDate], function(err, result, fields){
+		if(err)
+		{ res.json(
+			{
+				success : '0',
+				message : 'fail',
+				result : null
+			});
+		}
+		else
+		{ res.json(
+			{
+				success : '1',
+				message : 'OK',
+				result : null
+			});
+		}
+	})
+});
+app.post('/letter/deleteletter', function(req, res, next) {
+	var letterId = req.body.letter_id;
+	client.query('delete from letter where letter_id = ?',[letterId], function(err, result, fields){
+		if(err)
+		{ res.json(
+			{
+				success : '0',
+				message : 'fail',
+				result : null
+			});
+		}
+		else
+		{ res.json(
+			{
+				success : '1',
+				message : 'OK',
+				result : null
+			});
+		}
+	})
+});
+app.use('/calendar', calendar);
+>>>>>>> origin/master
 app.use('/chatting', chatting);
 
 app.post('/user/profile', function(req, res, next) {
