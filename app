@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var cal = require('./routes/cal');
 //test
 //mysql
 var mysql = require('mysql');
@@ -134,15 +134,11 @@ app.post('/letter/deleteletter', function(req, res, next) {
 	})
 });
 
-app.post('/calendar/remove', function(req, res, next) {
-	res.send('/calendar/remove sending complete');
-});
-app.post('/calendar/list', function(req, res, next) {
-	res.send('/calendar/list sending complete');
-});
-app.get('/chatting', function(req, res, next) {
-	res.send('/chatting sending complete');
-});
+app.post('/calendar/add', cal.add);
+app.post('/calendar/remove', cal.remove);
+app.post('/calendar/list', cal.list);
+app.get('/chatting', routes.chatting);
+
 app.post('/user/profile', function(req, res, next) {
 	res.send('/user/profile sending complete');
 });
