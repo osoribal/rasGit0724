@@ -8,6 +8,17 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+//mysql
+var mysql = require('mysql');
+
+//db
+var client = mysql.createConnection({
+	user : 'root',
+	password : '123qwe'
+});
+
+client.query('USE App');
+
 var app = express();
 
 // view engine setup
@@ -35,6 +46,14 @@ app.post('/link/reply', function(req, res, next) {
 	res.send('/link/reply sending complete');
 });
 app.post('/letter/letterlist', function(req, res, next) {
+	var linkId = req.body.link_id;
+	client.query('select * from letter where letter_id = linkId', function(err, result, fields){
+		if(err)
+		{ res.send('error'); }
+		else
+		{ res.json(result); }
+	})
+	}
 	res.send('/letter/letterlist sending complete');
 });
 app.post('/letter/readletter', function(req, res, next) {
