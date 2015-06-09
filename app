@@ -47,17 +47,9 @@ app.post('/letter/deleteletter', function(req, res, next) {
 	res.send('/letter/deleteletter sending complete');
 });
 app.post('/calendar/add', function(req, res, next) {
-	var Modi = req.body.Modi;
-	var date = req.body.date;
-	var Name = req.body.Name;
-	var Place = req.body.Place;
-	var Hour = req.body.Hour;
-	var Min = req.body.Min;
-	var Reply = req.body.Reply;
-	var Prealarm = req.body.Prealarm;
-	var Sound = req.body.Sound;
-	
-	res.send(Modi + " " + Name + " " + Hour + " " + Min);
+	req.on('data', function(data) {
+		res.send(data);
+	});
 });
 app.post('/calendar/remove', function(req, res, next) {
 	res.send('/calendar/remove sending complete');
