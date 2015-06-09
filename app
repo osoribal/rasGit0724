@@ -18,7 +18,7 @@ app.set('view engine', 'jade');
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -47,9 +47,8 @@ app.post('/letter/deleteletter', function(req, res, next) {
 	res.send('/letter/deleteletter sending complete');
 });
 app.post('/calendar/add', function(req, res, next) {
-	req.on('data', function(data) {
-		res.send(data);
-	});
+	var mode = req.body.Modi;
+	res.send(mode);
 });
 app.post('/calendar/remove', function(req, res, next) {
 	res.send('/calendar/remove sending complete');
