@@ -3,7 +3,25 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('chatting');
+	client.query('(select * from chatting order by date desc limit 3) order by date', function(err, rows, fields) {
+    	if(err) {
+    		res.json(
+				{
+					success : '0',
+					message : 'fail',
+					result : null
+				}
+			);
+		} else {
+			res.json(
+				{
+					success : '1',
+					message : 'OK',
+					result : rows
+				}
+			);
+		}
+	});
 });
 
 module.exports = router;
