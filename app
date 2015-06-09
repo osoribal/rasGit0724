@@ -74,14 +74,16 @@ app.post('/calendar/add', function(req, res, next) {
 						{
 							success : '1',
 							message : 'OK',
-							result : rows.insertId
+							result : null
 						}
 					);
 				}
 			}
 		);
 	} else {
-		client.query('insert into calendar (link_id, calendar_name, place, date, hour, min, reply, prealarm, sound) values (1, ?, ?, ?, ?, ?, ?, ?, ?)', [req.body.Name, req.body.Place, req.body.date, req.body.Hour, req.body.Min, req.body.Reply, req.body.Prealarm, req.body.Sound], function(err, rows, fields) {
+		client.query('insert into calendar (link_id, calendar_name, place, date, hour, min, reply, prealarm, sound) values (1, ?, ?, ?, ?, ?, ?, ?, ?)', 
+			[req.body.Name, req.body.Place, req.body.date, req.body.Hour, req.body.Min, req.body.Reply, req.body.Prealarm, req.body.Sound], 
+			function(err, rows, fields) {
     			if(err) {
     				res.json(
 						{
@@ -104,7 +106,27 @@ app.post('/calendar/add', function(req, res, next) {
 	}
 });
 app.post('/calendar/remove', function(req, res, next) {
-	res.send('/calendar/remove sending complete');
+	client.query('delete from calendar where calendar_id=?', req.body.Id, function(err, rows, fields) {
+    			if(err) {
+    				res.json(
+						{
+							success : '0',
+							message : 'fail',
+							result : null
+						}
+					);
+				} else {
+					res.json(
+						{
+							success : '1',
+							message : 'OK',
+							result : null
+						}
+					);
+				}
+			}
+		);
+	}
 });
 app.post('/calendar/list', function(req, res, next) {
 	res.send('/calendar/list sending complete');
