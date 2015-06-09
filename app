@@ -47,7 +47,6 @@ app.post('/link/reply', function(req, res, next) {
 });
 app.post('/letter/letterlist', function(req, res, next) {
 	var linkId = req.body.link_id;
-	console.log(linkId);
 	client.query('select * from letter where link_id = ?',[linkId], function(err, result, fields){
 		if(err)
 		{ res.json(
@@ -69,13 +68,70 @@ app.post('/letter/letterlist', function(req, res, next) {
 });
 	
 app.post('/letter/readletter', function(req, res, next) {
-	res.send('/letter/readletter sending complete');
+	var letterId = req.body.letter_id;
+	client.query('select * from letter where letter_id = ?',[letterId], function(err, result, fields){
+		if(err)
+		{ res.json(
+			{
+				success : '0',
+				message : 'fail',
+				result : null
+			});
+		}
+		else
+		{ res.json(
+			{
+				success : '1',
+				message : 'OK',
+				result : result
+			});
+		}
+	})
 });
 app.post('/letter/writeletter', function(req, res, next) {
-	res.send('/letter/writeletter sending complete');
+	var linkId = req.body.link_id;
+	var senderId = req.body.user_id;
+	var letterContent = req.body.letter_content;
+	var letterDate = req.body.date;
+	client.query('insert into letter (link_id, sender_id, content, date) value (?, ?, ?, ?)',[linkId, senderId, letterContent, letterDate], function(err, result, fields){
+		if(err)
+		{ res.json(
+			{
+				success : '0',
+				message : 'fail',
+				result : null
+			});
+		}
+		else
+		{ res.json(
+			{
+				success : '1',
+				message : 'OK',
+				result : null
+			});
+		}
+	})
 });
 app.post('/letter/deleteletter', function(req, res, next) {
-	res.send('/letter/deleteletter sending complete');
+	var letterId = req.body.letter_id;
+	client.query('delete from letter where letter_id = ?',[letterId], function(err, result, fields){
+		if(err)
+		{ res.json(
+			{
+				success : '0',
+				message : 'fail',
+				result : null
+			});
+		}
+		else
+		{ res.json(
+			{
+				success : '1',
+				message : 'OK',
+				result : null
+			});
+		}
+	})
 });
 
 app.post('/calendar/remove', function(req, res, next) {
