@@ -47,7 +47,7 @@ app.post('/letter/deleteletter', function(req, res, next) {
 	res.send('/letter/deleteletter sending complete');
 });
 app.post('/calendar/add', function(req, res, next) {
-	var mode = req.body.Modi;
+	var mode = req.param.Modi;
 	console.log(mode);
 	res.send(mode);
 });
