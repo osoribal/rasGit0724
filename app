@@ -64,7 +64,7 @@ app.post('/calendar/add', function(req, res, next) {
 						{
 							success : '1',
 							message : 'OK',
-							result : result
+							result : rows
 						}
 					);
 				}
@@ -87,7 +87,7 @@ app.post('/calendar/add', function(req, res, next) {
 						{
 							success : '1',
 							message : 'OK',
-							result : result
+							result : rows
 						}
 					);
 				}
