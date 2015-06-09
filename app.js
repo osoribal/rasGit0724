@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 //aaaaaaaaaaa
 var routes = require('./routes/index');
-var cal = require('./routes/cal');
+var calendar = require('./routes/calendar');
 var chatting = require('./routes/chatting');
 
 //mysql
@@ -134,7 +134,7 @@ app.post('/letter/deleteletter', function(req, res, next) {
 		}
 	})
 });
-app.use('/calendar', cal);
+app.use('/calendar', calendar);
 app.use('/chatting', chatting);
 
 app.post('/user/profile', function(req, res, next) {
