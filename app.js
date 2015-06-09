@@ -4,10 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+//aaaaaaaaaaa
 var routes = require('./routes/index');
 var cal = require('./routes/cal');
-//test
+var chatting = require('./routes/chatting');
+
 //mysql
 var mysql = require('mysql');
 
@@ -133,11 +134,8 @@ app.post('/letter/deleteletter', function(req, res, next) {
 		}
 	})
 });
-
-app.post('/calendar/add', cal.add);
-app.post('/calendar/remove', cal.remove);
-app.post('/calendar/list', cal.list);
-app.get('/chatting', routes.chatting);
+app.use('/calendar', cal);
+app.use('/chatting', chatting);
 
 app.post('/user/profile', function(req, res, next) {
 	res.send('/user/profile sending complete');
