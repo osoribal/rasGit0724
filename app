@@ -51,20 +51,46 @@ app.post('/calendar/add', function(req, res, next) {
 		client.query('update calendar set calendar_name=req.body.Name, place=req.body.Place, date=req.body.date,
 			hour=req.body.Hour, min=req.body.Min, reply=req.body.Reply, prealarm=req.body.Prealarm, sound=req.body.Sound
 			where calendar_id = req.body.Id', function(err, rows, fields) {
-    			if (err) throw err;
-    			for (var i in rows) {
-			 		console.log('Post Titles: ', rows[i].post_title);
-    			}
+    			if(err) {
+    				res.json(
+						{
+							success : '0',
+							message : 'fail',
+							result : null
+						}
+					);
+				} else {
+					res.json(
+						{
+							success : '1',
+							message : 'OK',
+							result : result
+						}
+					);
+				}
 			});
 		);
 	} else {
 		client.query('insert into calendar (link_id, calendar_name, place, date, hour, min, reply, prealarm, sound)
 			values (1, req.body.Name, req.body.Place, req.body.date, req.body.Hour,
 			req.body.Min, req.body.Reply, req.body.Prealarm,req.body.Sound)', function(err, rows, fields) {
-    			if (err) throw err;
-    			for (var i in rows) {
-			 		console.log('Post Titles: ', rows[i].post_title);
-    			}
+    			if(err) {
+    				res.json(
+						{
+							success : '0',
+							message : 'fail',
+							result : null
+						}
+					);
+				} else {
+					res.json(
+						{
+							success : '1',
+							message : 'OK',
+							result : result
+						}
+					);
+				}
 			});
 		);
 	}
