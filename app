@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 //aaaaaaaaaaa
 var routes = require('./routes/index');
 var cal = require('./routes/cal');
+var chatting = require('./routes/chatting');
 
 //mysql
 var mysql = require('mysql');
