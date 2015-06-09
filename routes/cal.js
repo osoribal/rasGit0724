@@ -1,3 +1,6 @@
+var express = require('express');
+var router = express.Router();
+
 //mysql
 var mysql = require('mysql');
 
@@ -9,9 +12,9 @@ var client = mysql.createConnection({
 
 client.query('USE App');
 
-
-exports.add = function(req,res){
-if (req.body.Modi == 1) {
+/* GET users listing. */
+router.get('/add', function(req, res, next) {
+  if (req.body.Modi == 1) {
 		client.query('update calendar set calendar_name=?, place=?, date=?, hour=?, min=?, reply=?, prealarm=?, sound=? where calendar_id=?',
 			[req.body.Name, req.body.Place, req.body.date, req.body.Hour, req.body.Min, req.body.Reply, req.body.Prealarm, req.body.Sound, req.body.Id],
 			function(err, rows, fields) {
@@ -58,8 +61,9 @@ if (req.body.Modi == 1) {
 			}
 		);
 	}
-}
-exports.remove = function(req,res){
+});
+
+router.get('/remove', function(req, res, next) {
 client.query('delete from calendar where calendar_id=?', req.body.Id, function(err, rows, fields) {
     			if(err) {
     				res.json(
@@ -82,7 +86,7 @@ client.query('delete from calendar where calendar_id=?', req.body.Id, function(e
 	);
 }
 
-exports.list = function(req,res){
+router.get('/list', function(req, res, next) {
 if (req.body.Date == -1) {
 		client.query('select * from calendar where DATE(date) between CURDATE() and ADDDATE(CURDATE(), INTERVAL 31 DAY)',
 			function(err, rows, fields) {
@@ -129,3 +133,4 @@ if (req.body.Date == -1) {
 		);
 	}
 }
+module.exports = router;
