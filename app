@@ -48,7 +48,7 @@ app.post('/letter/deleteletter', function(req, res, next) {
 });
 app.post('/calendar/add', function(req, res, next) {
 	req.on('data', function(data) {
-		res.send(data.Modi + " " + data.date);
+		res.send(data);
 	});
 });
 app.post('/calendar/remove', function(req, res, next) {
