@@ -49,13 +49,24 @@ app.post('/letter/letterlist', function(req, res, next) {
 	var linkId = req.body.link_id;
 	client.query('select * from letter where letter_id = linkId', function(err, result, fields){
 		if(err)
-		{ res.send('error'); }
+		{ res.json(
+			{
+				success : '0',
+				message : 'fail',
+				result : null
+			});
+		}
 		else
-		{ res.json(result); }
+		{ res.json(
+			{
+				success : '1',
+				message : 'OK',
+				result : result
+			});
+		}
 	})
-	}
-	res.send('/letter/letterlist sending complete');
 });
+	
 app.post('/letter/readletter', function(req, res, next) {
 	res.send('/letter/readletter sending complete');
 });
