@@ -48,7 +48,7 @@ app.post('/link/reply', function(req, res, next) {
 app.post('/letter/letterlist', function(req, res, next) {
 	var linkId = req.body.link_id;
 	console.log(linkId);
-	client.query('select * from letter where letter_id = ?',[linkId], function(err, result, fields){
+	client.query('select * from letter where link_id = ?',[linkId], function(err, result, fields){
 		if(err)
 		{ res.json(
 			{
