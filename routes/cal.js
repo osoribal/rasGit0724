@@ -64,27 +64,26 @@ router.post('/add', function(req, res, next) {
 });
 
 router.post('/remove', function(req, res, next) {
-client.query('delete from calendar where calendar_id=?', req.body.Id, function(err, rows, fields) {
-    			if(err) {
-    				res.json(
-						{
-							success : '0',
-							message : 'fail',
-							result : null
-						}
-					);
-			} else {
-				res.json(
-					{
-						success : '1',
-						message : 'OK',
-						result : null
-					}
-				);
-			}
+	client.query('delete from calendar where calendar_id=?', req.body.Id, function(err, rows, fields) {
+    	if(err) {
+    		res.json(
+				{
+					success : '0',
+					message : 'fail',
+					result : null
+				}
+			);
+		} else {
+			res.json(
+				{
+					success : '1',
+					message : 'OK',
+					result : null
+				}
+			);
 		}
-	);
-}
+	});
+});
 
 router.post('/list', function(req, res, next) {
 if (req.body.Date == -1) {
@@ -132,5 +131,5 @@ if (req.body.Date == -1) {
 			}
 		);
 	}
-}
+});
 module.exports = router;
