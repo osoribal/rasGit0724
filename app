@@ -57,10 +57,8 @@ app.post('/letter/deleteletter', function(req, res, next) {
 	res.send('/letter/deleteletter sending complete');
 });
 
-app.post('/calendar/add', cal.add);
-app.post('/calendar/remove', cal.remove);
-app.post('/calendar/list', cal.list);
-app.get('/chatting', routes.chatting);
+app.use('/calendar', cal);
+app.use('/chatting', chatting);
 
 app.post('/user/profile', function(req, res, next) {
 	res.send('/user/profile sending complete');
