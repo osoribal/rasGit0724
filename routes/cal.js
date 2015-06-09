@@ -1,3 +1,14 @@
+//mysql
+var mysql = require('mysql');
+
+//db
+var client = mysql.createConnection({
+	user : 'root',
+	password : '123qwe'
+});
+
+client.query('USE App');
+
 
 exports.add = function(req,res){
 if (req.body.Modi == 1) {
