@@ -7,7 +7,8 @@ var bodyParser = require('body-parser');
 
 var calendar = require('./routes/calendar');
 var chatting = require('./routes/chatting');
-var letter = require('./routes/letter');
+var letter = require('./routes/letter');	//letter - list, write, read, delete
+var link = require('./routes/link');		//link - find, request, reply
 //mysql
 var mysql = require('mysql');
 
@@ -36,21 +37,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.post('/user/login', function(req, res, next) {
 	res.send('/user/login sending complete');
 });
-app.post('/link/findpartner', function(req, res, next) {
-	res.send('/link/findpartner sending complete');
-});
-app.post('/link/request', function(req, res, next) {
-	res.send('/link/request sending complete');
-});
-app.post('/link/reply', function(req, res, next) {
-	res.send('/link/reply sending complete');
-});
+
 
 app.use('/calendar', calendar);
 
 app.use('/chatting', chatting);
 
 app.use('/letter', letter);
+
+app.use('/link', link);
 
 app.post('/user/profile', function(req, res, next) {
 	res.send('/user/profile sending complete');
