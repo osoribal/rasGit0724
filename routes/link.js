@@ -14,7 +14,7 @@ client.query('USE App');
 
 
 
-router.post('/link/findpartner', function(req, res, next) {
+router.post('/findpartner', function(req, res, next) {
 	var partnerMail = req.body.partner_mail;
 	client.query('select user_id from USER where email = ?',[partnerMail], function(err, result, fields){
 		if(err)
@@ -33,7 +33,7 @@ router.post('/link/findpartner', function(req, res, next) {
 				{
 					success : '1',
 					message : 'OK',
-					result : null
+					result : result
 				});
 			}//find partner fail
 			else
