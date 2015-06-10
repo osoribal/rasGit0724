@@ -28,7 +28,7 @@ router.post('/findpartner', function(req, res, next) {
 		else
 		{ 	//find partner success
 			console.log(result);
-			if(result.length() != 0)
+			if(result.length != 0)
 			{
 				res.json(
 				{
