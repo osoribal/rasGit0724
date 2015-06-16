@@ -38,8 +38,8 @@ router.post('/add', function(req, res, next) {
 			}
 		);
 	} else {
-		client.query('insert into calendar (link_id, calendar_name, place, date, hour, min, reply, prealarm, sound) values (1, ?, ?, ?, ?, ?, ?, ?, ?)', 
-			[req.body.Name, req.body.Place, req.body.date, req.body.Hour, req.body.Min, req.body.Reply, req.body.Prealarm, req.body.Sound], 
+		client.query('insert into calendar (link_id, calendar_name, place, date, hour, min, reply, prealarm, sound) values (?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+			[req.body.LinkId, req.body.Name, req.body.Place, req.body.date, req.body.Hour, req.body.Min, req.body.Reply, req.body.Prealarm, req.body.Sound], 
 			function(err, rows, fields) {
     			if(err) {
     				res.json(
@@ -87,7 +87,7 @@ router.post('/remove', function(req, res, next) {
 
 router.post('/list', function(req, res, next) {
 if (req.body.Date == -1) {
-		client.query('select * from calendar where DATE(date) between CURDATE() and ADDDATE(CURDATE(), INTERVAL 31 DAY)',
+		client.query('select * from calendar where (DATE(date) between CURDATE() and ADDDATE(CURDATE(), INTERVAL 31 DAY)) and link_id=?', req.body.LinkId,
 			function(err, rows, fields) {
     			if(err) {
     				res.json(
@@ -109,7 +109,7 @@ if (req.body.Date == -1) {
 			}
 		);
 	} else {
-		client.query('select * from calendar where DATE(date)=?', req.body.Date, 
+		client.query('select * from calendar where (DATE(date)=?) and link_id=?', req.body.Date, req.body.LinkId, 
 			function(err, rows, fields) {
     			if(err) {
     				res.json(
