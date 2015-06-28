@@ -9,6 +9,8 @@ var calendar = require('./routes/calendar');
 var chatting = require('./routes/chatting');
 var letter = require('./routes/letter');	//letter - list, write, read, delete
 var link = require('./routes/link');		//link - find, request, reply
+var user = require('./routes/user');    //user - user infomation
+
 //mysql
 var mysql = require('mysql');
 
@@ -46,6 +48,8 @@ app.use('/chatting', chatting);
 app.use('/letter', letter);
 
 app.use('/link', link);
+
+app.user('/user', user);
 
 app.post('/user/profile', function(req, res, next) {
 	res.send('/user/profile sending complete');
