@@ -96,8 +96,9 @@ router.post('/uploadprofile', function(req, res, next) {
 	var userBirth = req.body.user_birth;
 	var userProfileURL = req.body.user_profile_url;	
 
-	client.query('insert into USER (user_id, user_name, phone_number, profile_pic_url, birthday) values (?, ?, ?, ?, ?)',
-		[userId, userName, userPhone, userProfileURL, userBirth], function(err, result, fields){
+//update문으로 바꿀것.
+	client.query('UPDATE USER SET user_name=?, phone_number=?, profile_pic_url=?, birthday=? WHERE user_id=?',
+		[userName, userPhone, userProfileURL, userBirth, userId], function(err, result, fields){
 		if(err)
 		{ res.json(
 			{
