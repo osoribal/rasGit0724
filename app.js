@@ -36,11 +36,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.post('/user/login', function(req, res, next) {
-	res.send('/user/login sending complete');
-});
-
-
 app.use('/calendar', calendar);
 
 app.use('/chatting', chatting);
