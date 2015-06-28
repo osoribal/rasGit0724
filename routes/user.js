@@ -19,7 +19,9 @@ router.post('/login', function(req, res, next) {
 
 	client.query('select * from USER where email = ?',[email], function(err, result, fields){
 		if(err)
-		{ res.json(
+		{ 
+			console.log("login select user fail : " + err)
+			res.json(
 			{
 				success : '0',
 				message : 'fail',
@@ -34,6 +36,7 @@ router.post('/login', function(req, res, next) {
 				client.query('insert into USER (email, phone_number, request) values (?, ?)', [email, userPhone, 0], function(err, result, fields){
 					if(err)
 					{
+						console.log("login insert fail : " + err);
 						res.json(
 						{
 							success : '0',
