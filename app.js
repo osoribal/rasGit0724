@@ -49,7 +49,7 @@ app.use('/letter', letter);
 
 app.use('/link', link);
 
-app.user('/user', user);
+app.use('/user', user);
 
 app.get('/notice', function(req, res, next) {
   client.query('select * from notice', function(err, result, fields){
