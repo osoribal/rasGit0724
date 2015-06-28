@@ -51,18 +51,27 @@ app.use('/link', link);
 
 app.user('/user', user);
 
-app.post('/user/profile', function(req, res, next) {
-	res.send('/user/profile sending complete');
-});
-app.post('/user/uploadprofile', function(req, res, next) {
-	res.send('/user/uploadprofile sending complete');
-});
 app.get('/notice', function(req, res, next) {
-	res.send('/notice sending complete');
+  client.query('select * from notice', function(err, result, fields){
+    if(err)
+    { res.json(
+      {
+        success : '0',
+        message : 'fail',
+        result : null
+      }); 
+    }
+    else
+    { res.json(
+      {
+        success : '1',
+        message : 'OK',
+        result : result
+      });
+    }
+  })
 });
-app.post('/user/dropout', function(req, res, next) {
-	res.send('/user/dropout sending complete');
-});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

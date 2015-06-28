@@ -16,6 +16,7 @@ client.query('USE App');
 
 router.post('/findpartner', function(req, res, next) {
 	var partnerMail = req.body.partner_mail;
+	var userId = req.body.user_id;
 	client.query('select user_id from USER where email = ?',[partnerMail], function(err, result, fields){
 		if(err)
 		{ res.json(
@@ -27,15 +28,34 @@ router.post('/findpartner', function(req, res, next) {
 		}
 		else
 		{ 	//find partner success
-			console.log(result);
 			if(result.length != 0)
 			{
-				res.json(
-				{
-					success : '1',
-					message : 'OK',
-					result : result
+				//set my request state
+				client.query('update USER set request = ? where user_id = ?', [userId, userId], function(err, result, fields){
+					if(err)
+					{
+						res.json(
+						{
+							success : '0',
+							message : 'fail',
+							result : null
+						});
+					}
+					else
+					{
+						//client.query(change partner req state)
+						res.json(
+						{
+							success : '1',
+							message : 'OK',
+							result : null
+						});
+					}
 				});
+
+
+
+
 			}//find partner fail
 			else
 			{
@@ -50,6 +70,7 @@ router.post('/findpartner', function(req, res, next) {
 	})
 });
 
+//request link to partner
 router.post('/linkreq', function(req, res, next) {
 	var partnerMail = req.body.partner_mail;
 	client.query('update USER set request = 1 where email = ?',[partnerMail], function(err, result, fields){
@@ -72,6 +93,7 @@ router.post('/linkreq', function(req, res, next) {
 	})
 });	
 
+//check link request for me
 router.post('/checkreq', function(req, res, next) {
 	var userId = req.body.user_id;
 	client.query('select request from USER where user_id = ?',[userId], function(err, result, fields){
