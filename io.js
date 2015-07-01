@@ -1,5 +1,16 @@
 var io = require('socket.io')();
 
+//mysql
+var mysql = require('mysql');
+
+//db
+var client = mysql.createConnection({
+	user : 'root',
+	password : '123qwe'
+});
+
+client.query('USE App');
+
 io.on('connection', function(socket) {
 	console.log('user connected');
 
