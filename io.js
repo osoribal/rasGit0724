@@ -5,11 +5,13 @@ io.on('connection', function(socket) {
 
 	//join event
 	socket.on('join', function(data) {
+		console.log('user join room : ' + data);
 		socket.join(data);
 	});
 
 	//message event
 	socket.on('message', function(data) {
+		console.log('user send message : ' + data.MESSAGE);
 		client.query('insert into chatting (link_id, sender_id, message, picture, date) values (?, ?, ?, ?, NOW())', 
 			[data.LINK_ID, data.SENDER_ID, data.MESSAGE, data.PICTURE], 
 			function(err, rows, fields) {
