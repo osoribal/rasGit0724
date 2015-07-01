@@ -14,7 +14,7 @@ client.query('USE App');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-	client.query('(select * from chatting where link_id=? order by date desc limit 30) order by date',req.body.LinkId, function(err, rows, fields) {
+	client.query('(select * from chatting where link_id=? order by date desc limit 30) order by date',req.query.LinkId, function(err, rows, fields) {
     	if(err) {
     		res.json(
 				{
