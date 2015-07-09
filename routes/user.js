@@ -15,8 +15,8 @@ client.query('USE App');
 router.post('/login', function(req, res, next) {
 	var email = req.body.e_mail;
 	var userPhone = req.body.phone_number;
-	var accessToken = req.body.access_token;
 
+	//check if a client is already join
 	client.query('select * from USER where email = ?',[email], function(err, result, fields){
 		if(err)
 		{ 
@@ -33,7 +33,7 @@ router.post('/login', function(req, res, next) {
 			//not join
 			if(result.length == 0)
 			{
-				client.query('insert into USER (email, phone_number, request) values (?, ?, ?)', [email, userPhone, 0], function(err, result, fields){
+				client.query('insert into USER (email, phone_number, request) values ('?', '?', '?')', [email, userPhone, 0], function(err, result, fields){
 					if(err)
 					{
 						console.log("login insert fail : " + err);
