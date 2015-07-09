@@ -50,7 +50,7 @@ router.post('/login', function(req, res, next) {
 						res.json({
 							success : '1',
 							message : 'OK',
-							result : result.rows[0].user_id;
+							result : result.rows[0].user_id
 						});
 					}
 				});
