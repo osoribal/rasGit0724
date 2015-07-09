@@ -31,10 +31,12 @@ router.post('/login', function(req, res, next) {
 		else
 		{ 
 			console.log(result);
+			console.log(result.length);
 			//not join
-			if(result == null)
+			if(result == [])
 			{
 				console.log(email + " " + userPhone);
+
 
 				client.query('insert into USER (email, phone_number, request) values (?, ?, ?)', [email, userPhone, '0'], function(err, result, fields){
 					if(err)
