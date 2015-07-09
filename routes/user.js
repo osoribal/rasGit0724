@@ -35,7 +35,7 @@ router.post('/login', function(req, res, next) {
 			{
 				console.log(email + " " + userPhone);
 
-				client.query('insert into USER (email, phone_number, request) values (?, ?, ?)', [email, userPhone, 0], function(err, result, fields){
+				client.query('insert into USER (email, phone_number, request) values (?, ?, ?)', [email, userPhone, '0'], function(err, result, fields){
 					if(err)
 					{
 						console.log("login insert fail : " + err);
