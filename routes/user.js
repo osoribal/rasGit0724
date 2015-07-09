@@ -33,7 +33,7 @@ router.post('/login', function(req, res, next) {
 			//not join
 			if(result.length == 0)
 			{
-				client.query('insert into USER (email, phone_number, request) values ('?', '?', '?')', [email, userPhone, 0], function(err, result, fields){
+				client.query('insert into USER (email, phone_number, request) values (?, ?, ?) RETURNING user_id', [email, userPhone, 0], function(err, result, fields){
 					if(err)
 					{
 						console.log("login insert fail : " + err);
@@ -50,7 +50,7 @@ router.post('/login', function(req, res, next) {
 						res.json({
 							success : '1',
 							message : 'OK',
-							result : result.insertId
+							result : result.rows[0].user_id;
 						});
 					}
 				});
