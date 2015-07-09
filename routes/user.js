@@ -48,8 +48,13 @@ router.post('/login', function(req, res, next) {
 						});
 					}
 					else
-					{
-						client.query('select ');
+					{ res.json(
+						{
+							success : '1',
+							message : 'JOIN_OK',
+							result : result.insertId
+						});
+						
 					}
 				});
 			}
