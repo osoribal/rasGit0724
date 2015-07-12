@@ -28,7 +28,7 @@ router.post('/findpartner', function(req, res, next) {
 		}
 		else
 		{ 	//find partner success
-			if(result == 0)
+			if(result != 0)
 			{
 				//set my request state
 				client.query('update USER set request = ? where user_id = ?', [userId, userId], function(err, result, fields){
