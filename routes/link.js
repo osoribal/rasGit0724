@@ -17,7 +17,8 @@ client.query('USE App');
 router.post('/findpartner', function(req, res, next) {
 	var partnerMail = req.body.partner_mail;
 	var userId = req.body.user_id;
-	client.query('select user_id from USER where email = ?',[partnerMail], function(err, result, fields){
+	//find partner
+	client.query('select user_id from USER where email = ?',[partnerMail], function(err, PFresult, fields){
 		if(err)
 		{ res.json(
 			{
@@ -27,9 +28,12 @@ router.post('/findpartner', function(req, res, next) {
 			});
 		}
 		else
-		{ 	//find partner success
-			if(result != 0)
+		{ 
+
+			//find partner success
+			if(PFresult != 0)
 			{
+				console.log(PFresult);
 				//set my request state
 				client.query('update USER set request = ? where user_id = ?', [userId, userId], function(err, result, fields){
 					if(err)
@@ -59,7 +63,7 @@ router.post('/findpartner', function(req, res, next) {
 								{
 									success : '1',
 									message : 'OK',
-									result : null
+									result : userId
 								});	
 							}
 						});
