@@ -151,11 +151,26 @@ router.post('/reply', function(req, res, next) {
 									});
 							}else
 							{
-								res.json(
-									{
-										success : '1',
-										message : 'link_success',
-										result : result.insertId
+								var linkId = result.insertId;
+								client.query('update USER set link_id = ?, request = 0 where user_id = ? OR user_id = ?',[linkId, userId, requestId],
+									function(err, result, fields){
+										if(err)
+										{
+											res.json(
+												{
+													success : '0',
+													message : 'link_update_fail',
+													result : null
+												});
+										}else
+										{
+											res.json(
+												{
+													success : '1',
+													message : 'link_update_success',
+													result : null
+												});
+										}
 									});
 							}
 						});
@@ -167,8 +182,13 @@ router.post('/reply', function(req, res, next) {
 
 	}
 	else
-	{
-
+	{	//reject request link partner.
+		res.json(
+			{
+				success : '1',
+				message : 'reject_request',
+				result : null
+			});
 	}
 });
 
