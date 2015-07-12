@@ -43,12 +43,25 @@ router.post('/findpartner', function(req, res, next) {
 					}
 					else
 					{
-						//client.query(change partner req state)
-						res.json(
-						{
-							success : '1',
-							message : 'OK',
-							result : result
+						client.query('update USER set request = ? where email = ?', [userId, partnerMail], function(err, result, fields){
+							if(err)
+							{
+								res.json(
+								{
+									success : '0',
+									message : 'set_partner_fail',
+									result : null
+								});
+							}
+							else
+							{
+								res.json(
+								{
+									success : '1',
+									message : 'OK',
+									result : null
+								});	
+							}
 						});
 					}
 				});
