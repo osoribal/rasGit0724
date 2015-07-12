@@ -29,7 +29,7 @@ router.post('/findpartner', function(req, res, next) {
 		}
 		else
 		{ 
-
+			console.log(PFresult);
 			//find partner success
 			if(PFresult != 0)
 			{
