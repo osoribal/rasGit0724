@@ -16,6 +16,7 @@ router.post('/login', function(req, res, next) {
 	var email = req.body.e_mail;
 	var userPhone = req.body.phone_number;
 
+	console.log(email + " " + userPhone + "is received");
 	//check if a client is already join
 	client.query('select * from USER where email = ?',[email], function(err, result, fields){
 		if(err)
@@ -24,7 +25,7 @@ router.post('/login', function(req, res, next) {
 			res.json(
 			{
 				success : '0',
-				message : 'fail',
+				message : 'login_fail',
 				result : null
 			});
 		}
@@ -45,7 +46,7 @@ router.post('/login', function(req, res, next) {
 						res.json(
 						{
 							success : '0',
-							message : 'fail',
+							message : 'join_fail',
 							result : null
 						});
 					}
