@@ -18,7 +18,7 @@ router.post('/login', function(req, res, next) {
 
 	console.log(email + " " + userPhone + "is received");
 	//check if a client is already join
-	client.query('select * from USER where email = ?',[email], function(err, result, fields){
+	client.query('select * from USER where email = ?',[email], function(err, Uresult, fields){
 		if(err)
 		{ 
 			console.log("login select user fail : " + err)
@@ -31,15 +31,15 @@ router.post('/login', function(req, res, next) {
 		}
 		else
 		{ 
-			console.log(result);
-			console.log(result.length);
+			console.log(Uresult);
+			console.log(Uresult.length);
 			//not join
 			if(result == 0)
 			{
 				console.log(email + " " + userPhone);
 
 
-				client.query('insert into USER (email, phone_number, request) values (?, ?, ?)', [email, userPhone, '0'], function(err, result, fields){
+				client.query('insert into USER (email, phone_number, request) values (?, ?, ?)', [email, userPhone, '0'], function(err, Iresult, fields){
 					if(err)
 					{
 						console.log("login insert fail : " + err);
@@ -55,7 +55,7 @@ router.post('/login', function(req, res, next) {
 						{
 							success : '1',
 							message : 'JOIN_OK',
-							result : result.insertId
+							result : Iresult.insertId
 						});
 						
 					}
@@ -64,10 +64,9 @@ router.post('/login', function(req, res, next) {
 			else	//already join
 			{ res.json(
 				{
-					console.log(result);
 					success : '1',
 					message : 'LOGIN_OK',
-					result : result
+					result : Uresult
 				});
 			}
 		}
