@@ -64,9 +64,10 @@ router.post('/login', function(req, res, next) {
 			else	//already join
 			{ res.json(
 				{
+					console.log(result);
 					success : '1',
 					message : 'LOGIN_OK',
-					result : null
+					result : result
 				});
 			}
 		}
