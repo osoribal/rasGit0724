@@ -128,7 +128,7 @@ router.post('/dropout', function(req, res, next) {
 	var userId = req.body.user_id;
 
 	//initial partner informaiton
-	client.query('UPDATE USER SET link_id = 0, partner_id = 0 request = 0 where partner_id = ?', [userId], function(err, result, fields){
+	client.query('UPDATE USER SET link_id = 0, partner_id = 0, request = 0 where partner_id = ?', [userId], function(err, result, fields){
 		if(err)
 		{ res.json(
 			{
