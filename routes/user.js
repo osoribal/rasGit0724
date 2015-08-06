@@ -34,7 +34,7 @@ router.post('/login', function(req, res, next) {
 			console.log(Uresult);
 			console.log(Uresult.length);
 			//not join
-			if(result == 0)
+			if(Uresult == 0)
 			{
 				console.log(email + " " + userPhone);
 

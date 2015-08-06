@@ -21,7 +21,7 @@ router.post('/findpartner', function(req, res, next) {
 	var partnerMail = req.body.partner_mail;
 	var userId = req.body.user_id;
 	//find partner
-	client.query('select user_id from USER where email = ?',[partnerMail], function(err, PFresult, fields){
+	client.query('select * from USER where email = ?',[partnerMail], function(err, PFresult, fields){
 		if(err)
 		{ 
 			res.json({
@@ -66,7 +66,7 @@ router.post('/findpartner', function(req, res, next) {
 								{
 									success : '1',
 									message : 'OK',
-									result : userId
+									result : PFresult
 								});	
 							}
 						});
@@ -116,7 +116,7 @@ router.post('/reply', function(req, res, next) {
 	if(reply == 'yes')
 	{// link two people.
 		//set partner person : partner_id = my_id
-		client.query('update USER set partner_id = ? where user_id = ?',[userId, requestId], function(err, result, fields){
+		client.query('update USER set partner_id = ?, request = -1 where user_id = ?',[userId, requestId], function(err, result, fields){
 			if(err)
 			{
 				res.json(
@@ -128,7 +128,7 @@ router.post('/reply', function(req, res, next) {
 			}else
 			{
 				//set reply person : partner_id = request_id
-				client.query('update USER set partner_id = ? where user_id = ?', [requestId, userId], function(err, result, fields){
+				client.query('update USER set partner_id = ?, request = -1 where user_id = ?', [requestId, userId], function(err, result, fields){
 					if(err)
 					{
 						res.json(
