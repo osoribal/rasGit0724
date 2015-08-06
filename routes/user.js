@@ -127,8 +127,8 @@ router.post('/uploadprofile', function(req, res, next) {
 router.post('/dropout', function(req, res, next) {
 	var userId = req.body.user_id;
 
-	client.query('delete ',
-		[userId, userName, userPhone, userProfileURL, userBirth], function(err, result, fields){
+	//initial partner informaiton
+	client.query('UPDATE USER SET link_id = 0, partner_id = 0 request = 0 where partner_id = ?', [userId], function(err, result, fields){
 		if(err)
 		{ res.json(
 			{
@@ -138,12 +138,40 @@ router.post('/dropout', function(req, res, next) {
 			});
 		}
 		else
-		{ res.json(
-			{
-				success : '1',
-				message : 'OK',
-				result : null
-			});
+		{	//delete link lisk
+			client.query('DELETE from LNIK where user1 = ? OR user2 = ?', [userId, userId], function(err, result, fields){
+				if(err)
+				{res.json(
+					{
+						success : '0',
+						message : 'link delete fail',
+						result : null
+					});
+				}
+				else
+				{
+					//delete my information
+					client.query('DELETE from USER where user_id = ?', [userId], function(err, result, fields){
+						if(err)
+						{res.json(
+							{
+								success : '0',
+								message : 'delete my info fail',
+								result : null
+							});
+						}
+						else
+						{res.json(
+							{
+								success : '1',
+								message : 'drop out success',
+								result : null
+							});
+						}
+
+					});
+				}
+			}); 
 		}
 	});
 });
