@@ -139,7 +139,7 @@ router.post('/dropout', function(req, res, next) {
 		}
 		else
 		{	//delete link lisk
-			client.query('DELETE from LNIK where user1 = ? OR user2 = ?', [userId, userId], function(err, result, fields){
+			client.query('DELETE from LINK where user1 = ? OR user2 = ?', [userId, userId], function(err, result, fields){
 				if(err)
 				{res.json(
 					{
