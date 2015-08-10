@@ -7,6 +7,8 @@ var mysql = require('mysql');
 //file
 var fs = require('fs');
 
+var app = express();
+app.use(express.bodyParser());
 //db
 var client = mysql.createConnection({
 	user : 'root',
