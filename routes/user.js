@@ -105,14 +105,19 @@ router.post('/uploadprofile', function(req, res, next) {
 	var userBirth = req.body.user_birth;
 	var userProfileURL = req.body.user_profile_url;	
 
-//	fs.readFile(req.files.userProfileURL.path, function(err, data)){
-//		fs.writeFile(filePath, data, function(err){
-//			if(err)
-//			{ throw err; }
-//			else
-//			{ res.redirect("bakc"); }
-//		});
-//
+exports.upload = function(req, res){
+	fs.readFile(req.files.userProfileURL.path, function(err, data)){
+		var destination == __dirname + '\\..\\uploaded\\' + req.files.userProfileURL.name;
+		fs.writeFile(destination, data, function(err){
+			if(err)
+			{ throw err; }
+			else
+			{ res.redirect('back'); }
+		});
+}
+
+
+
 //update문으로 바꿀것.
 	client.query('UPDATE USER SET user_name=?, phone_number=?, profile_pic_url=?, birthday=? WHERE user_id=?',
 		[userName, userPhone, userProfileURL, userBirth, userId], function(err, result, fields){
