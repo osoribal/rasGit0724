@@ -4,6 +4,9 @@ var router = express.Router();
 //mysql
 var mysql = require('mysql');
 
+//file
+var fs = require('fs');
+
 //db
 var client = mysql.createConnection({
 	user : 'root',
@@ -101,6 +104,16 @@ router.post('/uploadprofile', function(req, res, next) {
 	var userPhone = req.body.user_phone;
 	var userBirth = req.body.user_birth;
 	var userProfileURL = req.body.user_profile_url;	
+
+	fs.readFile(req.files.userProfileURL.path, function(err, data)){
+		var filePath = __dirname + "\\files\\" + req.files.userProfileURL.name;
+		fs.writeFile(filePath, data, function(err){
+			if(err)
+			{ throw err; }
+			else
+			{ res.redirect("bakc"); }
+		});
+	}
 
 //update문으로 바꿀것.
 	client.query('UPDATE USER SET user_name=?, phone_number=?, profile_pic_url=?, birthday=? WHERE user_id=?',
