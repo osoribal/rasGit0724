@@ -106,7 +106,7 @@ router.post('/uploadprofile', function(req, res, next) {
 
 
 	fs.readFile(req.files.user_profile_url.path, function(err, data){
-		var destination = __dirname + '\\..\\uploaded\\' + req.files.user_profile_url.name;
+		var destination = __dirname + '\\uploaded\\' + req.files.user_profile_url.name;
 		fs.writeFile(destination, data, function(err){
 			if(err)
 			{ throw err; }
