@@ -102,12 +102,11 @@ router.post('/uploadprofile', function(req, res, next) {
 	var userId = req.body.user_id;
 	var userName = req.body.user_name;
 	var userPhone = req.body.user_phone;
-	var userBirth = req.body.user_birth;
-	var userProfileURL = req.body.user_profile_url;	
+	var userBirth = req.body.user_birth;	
 
 
-	fs.readFile(req.files.userProfileURL.path, function(err, data){
-		var destination = __dirname + '\\..\\uploaded\\' + req.files.userProfileURL.name;
+	fs.readFile(req.files.user_profile_url.path, function(err, data){
+		var destination = __dirname + '\\..\\uploaded\\' + req.files.user_profile_url.name;
 		fs.writeFile(destination, data, function(err){
 			if(err)
 			{ throw err; }
