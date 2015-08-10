@@ -107,7 +107,7 @@ router.post('/uploadprofile', function(req, res, next) {
 	var userBirth = req.body.user_birth;
 	var userProfileURL = req.body.user_profile_url;	
 
-exports.upload = function(req, res){
+
 	fs.readFile(req.files.userProfileURL.path, function(err, data){
 		var destination == __dirname + '\\..\\uploaded\\' + req.files.userProfileURL.name;
 		fs.writeFile(destination, data, function(err){
@@ -116,7 +116,7 @@ exports.upload = function(req, res){
 			else
 			{ res.redirect('back'); }
 		});
-}
+	});
 
 
 
