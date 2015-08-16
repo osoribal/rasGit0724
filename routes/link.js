@@ -116,7 +116,7 @@ router.post('/reply', function(req, res, next) {
 	if(reply == 'yes')
 	{// link two people.
 		//set partner person : partner_id = my_id
-		client.query('update USER set partner_id = ?, request = -1 where user_id = ?',[userId, requestId], function(err, result, fields){
+		client.query('update USER set partner_id = ?, request =-1 where user_id = ?',[userId, requestId], function(err, result, fields){
 			if(err)
 			{
 				res.json(
@@ -128,7 +128,7 @@ router.post('/reply', function(req, res, next) {
 			}else
 			{
 				//set reply person : partner_id = request_id
-				client.query('update USER set partner_id = ?, request = -1 where user_id = ?', [requestId, userId], function(err, result, fields){
+				client.query('update USER set partner_id = ?, request =-1 where user_id = ?', [requestId, userId], function(err, result, fields){
 					if(err)
 					{
 						res.json(
