@@ -69,7 +69,7 @@ router.post('/login', function(req, res, next) {
 				{
 					success : '1',
 					message : 'LOGIN_OK',
-					result : Uresult.user_id
+					result : Uresult[0].user_id
 				});
 			}
 		}
